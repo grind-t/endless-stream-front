@@ -1,15 +1,7 @@
-import { Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import { useState } from 'react'
+import MediaShare from './widgets/MediaShare'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <Box>
-      <Typography>Hello</Typography>
-    </Box>
-  )
+  return <MediaShare />
 }
 
 export default App

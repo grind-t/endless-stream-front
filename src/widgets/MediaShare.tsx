@@ -1,6 +1,6 @@
 import { LinearProgress, Typography } from '@mui/material'
 import { Box, SxProps, Theme } from '@mui/system'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { io } from 'socket.io-client'
 import YTPlayer from 'yt-player'
 
@@ -19,12 +19,10 @@ interface MediaShareProps {
 function MediaShare({ width, height, sx }: MediaShareProps) {
   const [videoTitle, setVideoTitle] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
-  const playerRef = useRef<HTMLElement>()
-  const playerElem = playerRef.current
 
-  useEffect(() => {
-    if (!playerElem) return
-    const player = new YTPlayer(playerElem, {
+  const initPlayer = useCallback((playerNode) => {
+    if (!playerNode) return
+    const player = new YTPlayer(playerNode, {
       width,
       height,
       autoplay: true,
@@ -47,11 +45,11 @@ function MediaShare({ width, height, sx }: MediaShareProps) {
       setProgress(percentage * 100)
     })
     player.on('ended', () => socket.emit('media/ended'))
-  }, [playerElem])
+  }, [])
 
   return (
     <Box sx={{ position: 'relative', lineHeight: 0, ...sx }}>
-      <Box ref={playerRef} />
+      <Box ref={initPlayer} />
       <LinearProgress
         variant="determinate"
         color="primary"

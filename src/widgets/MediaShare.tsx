@@ -87,7 +87,6 @@ function MediaShare({ width, height, sx }: MediaShareProps) {
           bottom: 5,
           left: 5,
           lineHeight: 1,
-          color: 'primary.contrastText',
         }}
       >
         {videoTitle}

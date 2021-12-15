@@ -19,6 +19,7 @@ interface MediaShareProps {
 function MediaShare({ width, height, sx }: MediaShareProps) {
   const [videoTitle, setVideoTitle] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
 
   const initPlayer = useCallback((playerNode) => {
     if (!playerNode) return
@@ -31,12 +32,13 @@ function MediaShare({ width, height, sx }: MediaShareProps) {
       annotations: false,
       modestBranding: true,
       related: false,
+      host: 'https://www.youtube-nocookie.com',
       timeupdateFrequency: 100,
     })
     const socket = io()
     socket.on('connect', () => console.log('connected'))
     socket.on('media/changed', (req: MediaRequest | undefined) => {
-      if (!req) return
+      if (!req) return setIsVisible(false)
       player.load(req.videoId, true)
       setVideoTitle(req.videoTitle)
     })
@@ -45,10 +47,18 @@ function MediaShare({ width, height, sx }: MediaShareProps) {
       setProgress(percentage * 100)
     })
     player.on('ended', () => socket.emit('media/ended'))
+    player.on('buffering', () => setIsVisible(true))
   }, [])
 
   return (
-    <Box sx={{ position: 'relative', lineHeight: 0, ...sx }}>
+    <Box
+      sx={{
+        position: 'relative',
+        visibility: isVisible ? 'visible' : 'hidden',
+        lineHeight: 0,
+        ...sx,
+      }}
+    >
       <Box ref={initPlayer} />
       <LinearProgress
         variant="determinate"

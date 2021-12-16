@@ -77,8 +77,7 @@ function MediaShare({ width, height, sx }: MediaShareProps) {
       <Box ref={initPlayer} />
       <LinearProgress
         variant="determinate"
-        color="primary"
-        sx={{ height: 25, opacity: 0.8, boxShadow: 3 }}
+        sx={{ height: 25, opacity: 0.9, boxShadow: 3 }}
         value={progress}
       />
       <Typography
@@ -87,6 +86,7 @@ function MediaShare({ width, height, sx }: MediaShareProps) {
           bottom: 5,
           left: 5,
           lineHeight: 1,
+          color: 'primary.contrastText',
         }}
       >
         {videoTitle}

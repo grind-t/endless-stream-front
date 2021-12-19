@@ -1,5 +1,4 @@
-import { LinearProgress, Typography } from '@mui/material'
-import { Box, SxProps, Theme } from '@mui/system'
+import clsx from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 import YTPlayer from 'yt-player'
@@ -13,10 +12,10 @@ interface MediaRequest {
 interface MediaShareProps {
   width: number
   height: number
-  sx?: SxProps<Theme>
+  className?: string
 }
 
-function MediaShare({ width, height, sx }: MediaShareProps) {
+function MediaShare({ width, height, className }: MediaShareProps) {
   const [player, setPlayer] = useState<YTPlayer>()
   const [videoTitle, setVideoTitle] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
@@ -66,32 +65,17 @@ function MediaShare({ width, height, sx }: MediaShareProps) {
   }, [player, width, height])
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        visibility: isVisible ? 'visible' : 'hidden',
-        lineHeight: 0,
-        ...sx,
-      }}
-    >
-      <Box ref={initPlayer} />
-      <LinearProgress
-        variant="determinate"
-        sx={{ height: 25, opacity: 0.9, boxShadow: 3 }}
-        value={progress}
-      />
-      <Typography
-        sx={{
-          position: 'absolute',
-          bottom: 5,
-          left: 5,
-          lineHeight: 1,
-          color: 'primary.contrastText',
-        }}
-      >
-        {videoTitle}
-      </Typography>
-    </Box>
+    <div className={clsx(isVisible ? 'visible' : 'visible', className)}>
+      <div ref={initPlayer} />
+      <div className="bg-sky-50 opacity-95 shadow">
+        <div
+          className="px-2 bg-gradient-to-r from-sky-300 to-sky-300 bg-no-repeat font-semibold transition-all duration-100 ease-linear"
+          style={{ backgroundSize: progress + '%' }}
+        >
+          {videoTitle}
+        </div>
+      </div>
+    </div>
   )
 }
 

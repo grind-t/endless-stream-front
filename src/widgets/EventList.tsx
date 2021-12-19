@@ -1,15 +1,6 @@
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Collapse,
-  SxProps,
-  Theme,
-} from '@mui/material'
+import { HeartIcon } from '@heroicons/react/solid'
+import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { TransitionGroup } from 'react-transition-group'
 import { io } from 'socket.io-client'
 
 enum EventType {
@@ -27,17 +18,18 @@ interface EventListItem {
 
 interface EventIconProps {
   event: EventType
+  className?: string
 }
 
-function EventIcon({ event }: EventIconProps) {
-  return <FavoriteIcon />
+function EventIcon({ event, className }: EventIconProps) {
+  return <HeartIcon className={className} />
 }
 
 interface EventListProps {
-  sx?: SxProps<Theme>
+  className?: string
 }
 
-function EventList({ sx }: EventListProps) {
+function EventList({ className }: EventListProps) {
   const [items, setItems] = useState<EventListItem[]>([])
 
   useEffect(() => {
@@ -49,35 +41,19 @@ function EventList({ sx }: EventListProps) {
   }, [])
 
   return (
-    <List sx={{ minWidth: 150, ...sx }}>
-      <TransitionGroup>
-        {items.map((item) => (
-          <Collapse key={item.id}>
-            <ListItem
-              disablePadding
-              sx={{
-                my: 0.5,
-                py: 0.5,
-                pr: 3,
-                pl: 2,
-                bgcolor: 'background.paper',
-                borderRadius: 1,
-                transform: 'skew(-15deg)',
-                boxShadow: 3,
-              }}
-            >
-              <ListItemIcon sx={{ transform: 'skew(15deg)' }}>
-                <EventIcon event={item.event} />
-              </ListItemIcon>
-              <ListItemText
-                primary={item.user}
-                sx={{ transform: 'skew(15deg)' }}
-              />
-            </ListItem>
-          </Collapse>
-        ))}
-      </TransitionGroup>
-    </List>
+    <div
+      className={clsx('flex flex-col-reverse min-w-[200px] gap-2', className)}
+    >
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className="flex items-center gap-2 px-2 rounded shadow shadow-gray-400 -skew-x-12 bg-white animate-fadeInRight"
+        >
+          <EventIcon event={item.event} className="w-5 h-5 skew-x-12" />
+          <span className="skew-x-12">{item.user}</span>
+        </div>
+      ))}
+    </div>
   )
 }
 

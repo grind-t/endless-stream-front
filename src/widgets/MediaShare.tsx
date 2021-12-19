@@ -65,7 +65,7 @@ function MediaShare({ width, height, className }: MediaShareProps) {
   }, [player, width, height])
 
   return (
-    <div className={clsx(isVisible ? 'visible' : 'visible', className)}>
+    <div className={clsx(isVisible ? 'visible' : 'invisible', className)}>
       <div ref={initPlayer} />
       <div className="bg-sky-50 opacity-95 shadow">
         <div

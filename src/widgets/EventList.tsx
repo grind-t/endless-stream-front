@@ -41,13 +41,11 @@ function EventList({ className }: EventListProps) {
   }, [])
 
   return (
-    <div
-      className={clsx('flex flex-col-reverse min-w-[200px] gap-2', className)}
-    >
+    <div className={clsx('flex flex-col space-y-2 min-w-[200px]', className)}>
       {items.map((item) => (
         <div
           key={item.id}
-          className="flex items-center gap-2 px-2 rounded shadow shadow-gray-400 -skew-x-12 bg-white animate-fadeInRight"
+          className="flex items-center space-x-2 px-2 py-1 rounded shadow shadow-gray-400 -skew-x-12 bg-white animate-fadeInRight"
         >
           <EventIcon event={item.event} className="w-5 h-5 skew-x-12" />
           <span className="skew-x-12">{item.user}</span>

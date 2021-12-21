@@ -52,6 +52,7 @@ function MediaShare({ width, height, className }: MediaShareProps) {
       setProgress(percentage * 100)
     })
     player.on('ended', () => socket.emit('media/ended'))
+    player.on('unplayable', () => socket.emit('media/ended'))
     socket.on('media/changed', handleMediaChange)
     return () => {
       socket.off('media/changed', handleMediaChange)

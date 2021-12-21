@@ -68,9 +68,9 @@ function MediaShare({ width, height, className }: MediaShareProps) {
   return (
     <div className={clsx(isVisible ? 'visible' : 'invisible', className)}>
       <div ref={initPlayer} />
-      <div className="bg-sky-50 opacity-95 shadow">
+      <div className="absolute left-0 bottom-0 bg-slate-400">
         <div
-          className="px-2 bg-gradient-to-r from-sky-300 to-sky-300 bg-no-repeat font-semibold transition-all duration-100 ease-linear"
+          className="px-2 bg-gradient-to-r from-slate-50 to-slate-50 bg-no-repeat font-semibold transition-all duration-100 ease-linear"
           style={{ backgroundSize: progress + '%' }}
         >
           {videoTitle}

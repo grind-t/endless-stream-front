@@ -45,7 +45,7 @@ function EventList({ className }: EventListProps) {
       {items.map((item) => (
         <div
           key={item.id}
-          className="flex items-center space-x-2 px-2 py-1 rounded shadow shadow-gray-400 -skew-x-12 bg-white animate-fadeInRight"
+          className="flex items-center space-x-2 px-2 py-1 rounded shadow shadow-gray-400 -skew-x-12 bg-gray-700/80 text-white animate-fadeInRight"
         >
           <EventIcon event={item.event} className="w-5 h-5 skew-x-12" />
           <span className="skew-x-12">{item.user}</span>

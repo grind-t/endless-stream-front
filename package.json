@@ -10,18 +10,15 @@
   "dependencies": {
     "@heroicons/react": "^1.0.5",
     "clsx": "^1.1.1",
-    "events": "^3.3.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "socket.io-client": "^4.4.0",
-    "yt-player": "^3.5.0"
+    "socket.io-client": "^4.4.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.1.1",
-    "@types/events": "^3.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@types/yt-player": "^3.5.1",
+    "@types/youtube": "^0.0.46",
     "@vitejs/plugin-react": "^1.0.0",
     "animated-tailwindcss": "^3.0.0-rc.1",
     "postcss": "^8.4.5",
